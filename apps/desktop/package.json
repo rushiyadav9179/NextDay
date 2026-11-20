@@ -1,0 +1,12 @@
+{
+  "name": "@nextday/desktop",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "echo Desktop wrapper configured",
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.0.0-rc"
+  }
+}

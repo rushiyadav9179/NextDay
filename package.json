@@ -1,0 +1,24 @@
+{
+  "name": "nextday",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NextDay - AI-Native Recruiting, Onboarding & HR Enterprise Suite",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces",
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "db:generate": "npm run db:generate --workspace=@nextday/api",
+    "db:migrate": "npm run db:migrate --workspace=@nextday/api",
+    "db:seed": "npm run db:seed --workspace=@nextday/api"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}

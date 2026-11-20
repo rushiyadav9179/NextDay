@@ -1,0 +1,45 @@
+services:
+  # NextDay API Service
+  - type: web
+    name: nextday-api
+    runtime: node
+    plan: standard
+    region: oregon
+    buildCommand: npm install && npm run build --workspace=@nextday/api
+    startCommand: cd apps/api && npx tsx prisma/startup.ts && npm run start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: COOKIE_SECRET
+        generateValue: true
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: CORS_ORIGIN
+        sync: false
+
+  # NextDay Static Web App
+  - type: web
+    name: nextday-web
+    runtime: static
+    buildCommand: npm install && npm run build --workspace=@nextday/web
+    staticPublishPath: ./apps/web/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        sync: false
+
+
